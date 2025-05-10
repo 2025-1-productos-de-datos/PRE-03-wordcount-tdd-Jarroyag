@@ -1,67 +1,14 @@
 
 #Ejemplo del caso de uso:
 # python3 -m homework data/input data/output
-import argparse
-import os
 import sys
 
+from homework.src._internals.count_words import count_words
+from homework.src._internals.parse_args import parse_args
+from homework.src._internals.read_all_lines import read_all_lines
+from homework.src._internals.split_into_words import split_into_words
+from homework.src._internals.write_word_counts import write_word_counts
 
-def prepocess_lines(lines):
-    return[line.lower().strip() for line in lines]
-   
-
-def split_into_words(lines):
-    words = []
-    for line in lines:
-        words.extend(word.strip(",.!?") for word in line.split())
-    return words
-
-
-def count_words(words):
-    word_counts = {}
-    for word in words:
-        word_counts[word] = word_counts.get(word, 0) + 1
-    return word_counts
-
-def write_word_counts(output_folder, word_counts):
-    if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
-
-    output_file = os.path.join(output_folder, "wordcount.tsv")
-
-    with open(output_file, "w", encoding="utf-8") as f:
-        for word, count in word_counts.items():
-            f.write(f"{word}\t{count}\n")
-
-
-
-def parse_args():
-
-    parser = argparse.ArgumentParser(description="Count words in files.")
-
-    parser.add_argument(
-        "input",
-        type=str,
-        help="Path to the input folder containing files to process",
-    )
-    parser.add_argument(
-        "output",
-        type=str,
-        help="Path to the output folder for results",
-    )
-
-    parsed_args = parser.parse_args()
-
-    return parsed_args.input, parsed_args.output
-
-def read_all_lines(input_folder):
-
-    lines = []
-    for filename in os.listdir(input_folder):
-        file_path = os.path.join(input_folder, filename)
-        with open(file_path, "r", encoding="utf-8") as f:
-            lines.extend(f.readlines())
-    return lines    
 
 def main():
     input_folder, output_folder = parse_args()

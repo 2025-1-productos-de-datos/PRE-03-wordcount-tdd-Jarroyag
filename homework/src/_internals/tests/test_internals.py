@@ -3,14 +3,12 @@ import shutil
 import subprocess
 import sys
 
-from ...wordcount import (
-    count_words,
-    parse_args,
-    prepocess_lines,
-    read_all_lines,
-    split_into_words,
-    write_word_counts,
-)
+from ..count_words import count_words
+from ..parse_args import parse_args
+from ..prepocess_lines import prepocess_lines
+from ..read_all_lines import read_all_lines
+from ..split_into_words import split_into_words
+from ..write_word_counts import write_word_counts
 
 
 def test_parse_args():
