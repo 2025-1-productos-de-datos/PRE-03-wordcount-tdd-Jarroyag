@@ -14,8 +14,8 @@ from homework.src._internals.write_word_counts import write_word_counts
 def main():
     input_folder, output_folder = parse_args()
     lines = read_all_lines(input_folder)
-    prepocess_lines = prepocess_lines(lines)
-    words = split_into_words(prepocess_lines)
+    preprocessed_lines = prepocess_lines(lines)
+    words = split_into_words(preprocessed_lines)
     word_counts = count_words(words)
     write_word_counts(output_folder, word_counts)
 
